@@ -1066,9 +1066,24 @@ pre[class*=" language-"] {
 
 .chat-window {
   position: relative; }
+
   .chat-window--message-input {
     padding-top: 1.5rem;
-    padding-bottom: 1.5rem; }
+    padding-bottom: 1.5rem;
+    width: calc(100% - 37px);
+  }
+  .chat-window--microphone-button {
+    width: 32px;
+    height: 68px;
+    padding: 19px 2px;
+    cursor: pointer;
+    background-color: #00B2EF;
+    position: absolute; /* this is a hack, but it gets the job done */
+    right: 0;
+  }
+  .chat-window--microphone-button.active {
+    background-color: #d74108;
+  }
 
 .chat-box {
   position: relative;

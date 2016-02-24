@@ -1,6 +1,7 @@
-# Dialog Node.js
+# Speech & Dialog Demo App
 
-  The Dialog starter application in Node.js is a sample that demonstrates how the IBM Watson [Dialog service][service_url] works in a specific context.
+  This is an extension of the IBM Watson [Dialog service][service_url] Dialog starter application that also incorporates 
+  the [Speech JS SDK](https://github.com/watson-developer-cloud/speech-javascript-sdk) to allow for voice interactions.
 <p align="center">
 <img src="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/img/service-gifs/dialog.gif" width="400">
 </p>

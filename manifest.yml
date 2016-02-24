@@ -2,11 +2,19 @@ declared-services:
   dialog-service:
     label: dialog
     plan: standard
+  stt-service:
+      label: speech_to_text
+      plan: standard
+  tts-service:
+      label: text_to_speech
+      plan: standard
 applications:
 - services:
   - dialog-service
-  name: dialog-nodejs
-  command: node app.js
+  - stt-service
+  - tts-service
+  name: speech-dialog
+  command: npm start
   path: .
   memory: 512M
   env:

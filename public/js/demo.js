@@ -26,8 +26,32 @@ $(document).ready(function () {
     $jsonPanel = $('#json-panel .base--textarea'),
     $information = $('.data--information'),
     $profile = $('.data--profile'),
-    $loading = $('.loader');
+    $loading = $('.loader'),
+    $micButton = $('.chat-window--microphone-button');
 
+  // note: these tokens expire after an hour.
+  var getSTTToken = $.ajax('/api/speech-to-text/token');
+  var getTTSToken = $.ajax('/api/text-to-speech/token');
+
+  var deactivateMicButton = $micButton.removeClass.bind($micButton, 'active');
+
+  function record() {
+    getSTTToken.then(function(token) {
+      $micButton.addClass('active');
+      WatsonSpeech.SpeechToText.recognizeMicrophone({
+        token: token,
+        continuous: false,
+        outputElement: $chatInput[0],
+        keepMicrophone: navigator.userAgent.indexOf('Firefox') > 0
+      }).promise().then(function() {
+        converse($chatInput.val());
+      })
+      .then(deactivateMicButton)
+      .catch(deactivateMicButton);
+    });
+  }
+
+  $micButton.click(record);
 
   $chatInput.keyup(function(event){
     if(event.keyCode === 13) {
@@ -66,6 +90,13 @@ $(document).ready(function () {
         console.log(dialog);
         var texts = dialog.conversation.response;
         var response = texts.join('&lt;br/&gt;'); // &lt;br/&gt; is <br/>
+
+        getTTSToken.then(function(token) {
+          WatsonSpeech.TextToSpeech.synthesize({
+            text: texts,
+            token: token
+          }).addEventListener('ended', record); // trigger the button again once recording stops
+        });
 
         $chatInput.show();
         $chatInput[0].focus();

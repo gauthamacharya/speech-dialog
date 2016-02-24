@@ -1,15 +1,11 @@
 {
-  "name": "DialogNodejsStarterApp",
-  "version": "0.1.8",
-  "description": "A sample nodejs app for Bluemix that use the Dialog",
-  "engines": {
-    "node": ">=0.10.38"
-  },
+  "name": "speech-dialog",
+  "version": "1.0.0",
+  "description": "A simple extension of the Watson Dialog sample app to use the Speech JS SDK",
   "repository": {
     "type": "git",
     "url": "https://github.com/watson-developer-cloud/dialog-nodejs.git"
   },
-  "author": "IBM Corp.",
   "contributors": [
     {
       "name": "James Zhang",
@@ -22,6 +18,10 @@
     {
       "name": "German Attanasio Ruiz",
       "email": "germanatt@us.ibm.com"
+    },
+    {
+      "name": "Nathan Friedly",
+      "url": "http://nfriedly.com/"
     }
   ],
   "license": "Apache-2.0",
@@ -35,9 +35,11 @@
   "dependencies": {
     "async": "^1.5.1",
     "body-parser": "~1.14.1",
+    "dotenv": "^2.0.0",
     "errorhandler": "~1.4.1",
     "express": "~4.13.3",
     "request": "^2.67.0",
+    "vcap_services": "^0.1.7",
     "watson-developer-cloud": "~1.0.6"
   }
 }

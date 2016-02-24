@@ -16,6 +16,8 @@
 
 'use strict';
 
+require('dotenv').config({silent: true});
+
 var express  = require('express'),
   app        = express(),
   fs         = require('fs'),
@@ -24,8 +26,15 @@ var express  = require('express'),
   extend     = require('util')._extend,
   watson     = require('watson-developer-cloud');
 
+
 // Bootstrap application settings
 require('./config/express')(app);
+
+// token endpoints
+// **Warning**: these endpoints should be guarded with additional authentication & authorization for production use
+app.use('/api/speech-to-text/', require('./stt-token.js'));
+app.use('/api/text-to-speech/', require('./tts-token.js'));
+
 
 // if bluemix credentials exists, then override local
 var credentials =  extend({
