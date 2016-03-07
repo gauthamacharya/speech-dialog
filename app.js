@@ -19,6 +19,7 @@
 require('dotenv').config({silent: true});
 
 var express  = require('express'),
+  secure     = require('express-secure-only'),
   app        = express(),
   fs         = require('fs'),
   path       = require('path'),
@@ -30,11 +31,16 @@ var express  = require('express'),
 // Bootstrap application settings
 require('./config/express')(app);
 
+
 // token endpoints
 // **Warning**: these endpoints should be guarded with additional authentication & authorization for production use
 app.use('/api/speech-to-text/', require('./stt-token.js'));
 app.use('/api/text-to-speech/', require('./tts-token.js'));
 
+// If in production (port bluemix uses for production) route all traffic through https
+if (process.env.VCAP_APP_PORT) {
+  app.use(secure());
+}
 
 // if bluemix credentials exists, then override local
 var credentials =  extend({
