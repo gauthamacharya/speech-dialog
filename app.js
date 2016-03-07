@@ -37,7 +37,7 @@ require('./config/express')(app);
 app.use('/api/speech-to-text/', require('./stt-token.js'));
 app.use('/api/text-to-speech/', require('./tts-token.js'));
 
-// If in production route all traffic through https
+// If in production (port bluemix uses for production) route all traffic through https
 if (process.env.VCAP_APP_PORT) {
   app.use(secure());
 }
