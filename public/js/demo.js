@@ -95,7 +95,7 @@ $(document).ready(function () {
           WatsonSpeech.TextToSpeech.synthesize({
             text: texts,
             token: token
-          }).addEventListener('ended', record); // trigger the button again once recording stops
+          }).addEventListener('ended', record); // trigger the button again once TTS playback stops
         });
 
         $chatInput.show();
