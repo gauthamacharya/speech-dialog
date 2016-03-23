@@ -94,7 +94,8 @@ $(document).ready(function () {
         getTTSToken.then(function(token) {
           WatsonSpeech.TextToSpeech.synthesize({
             text: texts,
-            token: token
+            token: token,
+            voice: 'en-US_AllisonVoice'
           }).addEventListener('ended', record); // trigger the button again once TTS playback stops
         });
 

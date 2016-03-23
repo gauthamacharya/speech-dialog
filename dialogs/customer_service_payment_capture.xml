@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialog xsi:noNamespaceSchemaLocation="WatsonDialogDocument_1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<flow>
+		<folder label="Main">
+			<output>
+				<prompt selectionType="RANDOM">
+					<item>Hi Valued Customer, Welcome to BuyEasy. How can we assist you today?</item>
+				</prompt>
+				<goto ref="getUserInput_1"/>
+			</output>
+			<getUserInput id="getUserInput_1">
+				<search ref="live_content"/>
+				<default>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>I'm sorry I did not understand your request.</item>
+							<item>I did not quite get that.</item>
+							<item>I did not catch what you said.</item>
+							<item>I'm not following you at the moment.</item>
+						</prompt>
+					</output>
+				</default>
+			</getUserInput>
+		</folder>
+		<folder label="Library">
+			<folder label="Live Content" id="live_content">
+				<input>
+					<grammar>
+						<item>I purchased a MBI bluetooth speaker from your website on the 9th of March and I don’t have an update on my order even ten days later!</item>
+						<item>I purchased *</item>
+						<item>$ I don’t have an update *</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>I am sorry to know that you haven’t received your order yet. Can you please give me a moment while I pull up your records and see what’s going on with your order?</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>Ok</item>
+									<item>OK</item>
+									<item>Sure</item>
+									<item>Alright</item>
+								</grammar>
+								<output>
+									<prompt selectionType="RANDOM">
+										<item>Thanks for your patience and Thanks for being our loyalty rewards member. I do see you placed an order on the 9th of March for $199.00. Is that correct?</item>
+									</prompt>
+									<getUserInput>
+										<input>
+											<grammar>
+												<item>Yes</item>
+												<item>Ya</item>
+												<item>Yep</item>
+											</grammar>
+											<output>
+												<prompt selectionType="RANDOM">
+													<item>Thanks for confirming that. I see that the credit card used while making this purchase is no longer valid and the authorization secured on the card had expired on 12th of March. Our vendors weren’t able to process your order as they weren’t able to re-authorize your card.</item>
+												</prompt>
+											</output>
+										</input>
+									</getUserInput>
+								</output>
+							</input>
+						</getUserInput>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>Oh! I had no clue about this. When was I supposed to know?</item>
+						<item>When was *</item>
+						<item>$ know?</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>from our records it looks like we did send an email with the subject ‘Payment Card Declined’ on the 12th of March 10:30 A.M. Can you confirm the email address on the order?</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>It is valuedcustomer@example.com</item>
+									<item>$ It is {Email}</item>
+									<item>It is {Email}</item>
+									<item>{Email}</item>
+								</grammar>
+								<action varName="Email" operator="SET_TO">{Email.value:main}</action>
+								<output>
+									<prompt selectionType="RANDOM">
+										<item> Thanks for confirming that. Our records indicate that we sent multiple emails to {Email} An order confirmation email was sent on 9th of March, A payment decline email was sent on 12th March and then a reminder again on 18th of March. There is a rare possibility that our emails might have ended up in your spam folder if you haven’t added our email address to safe sender list in your mail box. Can you please take a look at the spam folder of your mail box?</item>
+									</prompt>
+								</output>
+							</input>
+						</getUserInput>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>Let me quickly check *</item>
+						<item>Give me a moment to check</item>
+						<item>$ check *</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Sure. Take your time.</item>
+						</prompt>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>I do see $ emails from customerservice@buyeasy.com *</item>
+						<item>I see the emails</item>
+						<item>Yes, I see your emails</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>No problem Valued Customer. You are our loyal customer and we do everything at buyEasy to ensure we protect our customer’s interests. Would you like us to add a new credit card to the order and process it for you?</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>Please *</item>
+									<item>Yes *</item>
+									<item>Certainly</item>
+								</grammar>
+								<output>
+									<prompt/> 
+								</output>
+							</input>
+						</getUserInput>
+						
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>How long would it take if you cleared the order now?</item>
+						<item>How long *</item>
+						<item>when will I get my order?</item>
+						<item>When will $ order * ?</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>It would take between 5-7 days for your package to arrive considering you paid for a standard shipment. However, I can make an exception in your case and place a request to expedite your order. Would you like us to do that?</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>Sure *</item>
+									<item>Ok</item>
+									<item>yes</item>
+								</grammar>
+								<output>
+									<prompt selectionType="RANDOM">
+										<item>Thanks for the confirmation.</item>
+									</prompt>
+								</output>
+							</input>
+						</getUserInput>						
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>What would be the new expected date of delivery?</item>
+						<item>When will it be delivered ?</item>
+						<item>When will I get my delivery?</item>
+						<item>$ delivery *</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>At this moment the system indicates you would receive your package by Tuesday, the 22nd Of March. </item>
+						</prompt>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>That sounds perfect *</item>
+						<item>Sound Good</item>
+						<item>Allright</item>
+						<item>Fine</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Thank you very much. We can now move forward with the order. Whenever you are ready please provide us with a new credit card to process your payment for $199.00.</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>I am using a Visa Credit Card $ 8793</item>
+									<item>Let us use my Visa card XXXXXXXXXXXXXX8793</item>
+									<item>{Credit_Card_No}</item>
+								</grammar>
+								<action varName="Credit_Card_No" operator="SET_TO">{Credit_Card_No.value:main}</action>
+								<output>
+									<prompt selectionType="RANDOM">
+										<item>And what would be the expiry date and security code for the visa card?</item>
+									</prompt>
+									<getUserInput>
+										<input>
+											<grammar>
+												<item>Expiry Date is * and CVV is *</item>
+												<item>Expiry Date: {Expiry_Date} and CVV – {CVV}</item>
+												<item>{Expiry_Date},{CVV}</item>
+											</grammar>
+											<action varName="Expiry_Date" operator="SET_TO">{Expiry_Date.value:main}</action>
+											<action varName="CVV" operator="SET_TO">{CVV.value:main}</action>
+											<output>
+												<prompt selectionType="SEQUENTIAL">
+													<item>Thank you. Valued Customer, at this moment we are confirming that your payment has been successfully processed and your order will arrive within the next 3 days. You should receive a shipment confirmation email with a tracking number as soon as your order is shipped from our warehouse. Is there anything else that we could assist you with today? </item>
+												</prompt>
+											</output>								
+										</input>
+									</getUserInput>						
+								</output>								
+							</input>
+						</getUserInput>						
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>Thank you very much. Appreciate your help. I have no other queries. </item>
+						<item>Thank you</item>
+						<item>$ Thanks *</item>
+						<item>Appreciate *</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Please feel free to reach out to us if you have any questions. You can email your concerns or leave feedback at customerservice@buyeasy.com. We look forward to serving you in the future.</item>
+						</prompt>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>Bye</item>
+						<item>Ciao</item>
+						<item>Good Bye</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Good Bye and have a great day ahead</item>
+						</prompt>
+					</output>
+				</input>				
+			</folder>
+			<folder label="Storage"/>
+		</folder>
+		<folder label="Global"/>
+		<folder label="Concepts"/>
+	</flow>
+	<constants>
+		<var_folder name="Home"/>
+	</constants>
+	<variables>
+		<var_folder name="Home">
+			<var name="Email" type="TEXT"/>
+		</var_folder>
+	</variables>
+	<settings>
+	</settings>
+</dialog>
