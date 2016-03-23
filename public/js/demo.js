@@ -77,7 +77,7 @@ $(document).ready(function () {
       params.client_id = client_id;
     }
 
-    $.post('/conversation', params)
+    $.post('/api/dialog/conversation', params)
       .done(function onSucess(dialog) {
         $chatInput.val(''); // clear the text input
 
@@ -129,7 +129,7 @@ $(document).ready(function () {
       client_id: client_id
     };
 
-    $.post('/profile', params).done(function(data) {
+    $.post('/api/dialog/profile', params).done(function(data) {
       $profile.empty();
       data.name_values.forEach(function(par) {
         if (par.value !== '')

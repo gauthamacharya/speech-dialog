@@ -21,6 +21,7 @@ require('dotenv').config({silent: true});
 var express  = require('express'),
   secure     = require('express-secure-only'),
   app        = express(),
+  router	 = express.Router(),
   fs         = require('fs'),
   path       = require('path'),
   bluemix    = require('./config/bluemix'),
@@ -36,55 +37,14 @@ require('./config/express')(app);
 // **Warning**: these endpoints should be guarded with additional authentication & authorization for production use
 app.use('/api/speech-to-text/', require('./stt-token.js'));
 app.use('/api/text-to-speech/', require('./tts-token.js'));
+app.use('/api/dialog/', require('./dialog.js'));
 
 // If in production (port bluemix uses for production) route all traffic through https
 if (process.env.VCAP_APP_PORT) {
   app.use(secure());
 }
 
-// if bluemix credentials exists, then override local
-var credentials =  extend({
-  url: '<url>',
-  username: '<username>',
-  password: '<password>',
-  version: 'v1'
-}, bluemix.getServiceCreds('dialog')); // VCAP_SERVICES
 
-
-var dialog_id_in_json = (function() {
-  try {
-    var dialogsFile = path.join(path.dirname(__filename), 'dialogs', 'dialog-id.json');
-    var obj = JSON.parse(fs.readFileSync(dialogsFile));
-    return obj[Object.keys(obj)[0]].id;
-  } catch (e) {
-  }
-})();
-
-
-var dialog_id = process.env.DIALOG_ID || dialog_id_in_json || '<missing-dialog-id>';
-
-// Create the service wrapper
-var dialog = watson.dialog(credentials);
-
-app.post('/conversation', function(req, res, next) {
-  var params = extend({ dialog_id: dialog_id }, req.body);
-  dialog.conversation(params, function(err, results) {
-    if (err)
-      return next(err);
-    else
-      res.json({ dialog_id: dialog_id, conversation: results});
-  });
-});
-
-app.post('/profile', function(req, res, next) {
-  var params = extend({ dialog_id: dialog_id }, req.body);
-  dialog.getProfile(params, function(err, results) {
-    if (err)
-      return next(err);
-    else
-      res.json(results);
-  });
-});
 
 // error-handler settings
 require('./config/error-handler')(app);
