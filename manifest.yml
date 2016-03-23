@@ -13,7 +13,7 @@ applications:
   - dialog-service
   - stt-service
   - tts-service
-  name: speech-dialog
+  name: cognitivecommerce
   command: npm start
   path: .
   memory: 512M
