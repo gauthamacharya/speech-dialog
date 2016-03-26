@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialog xsi:noNamespaceSchemaLocation="WatsonDialogDocument_1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<flow>
+		<folder label="Main">
+			<output>
+				<prompt selectionType="RANDOM">
+					<item>Hi Valued Customer, Welcome to MBI. How can we assist you today?</item>
+				</prompt>
+				<goto ref="getUserInput_1"/>
+			</output>
+			<getUserInput id="getUserInput_1">
+				<search ref="live_content"/>
+				<default>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Can you please say that again ?</item>
+							<item>I did not catch what you said.</item>
+						</prompt>
+					</output>
+				</default>
+			</getUserInput>
+		</folder>
+		<folder label="Library">
+			<folder label="Live Content" id="live_content">
+				<input>
+					<grammar>
+						<item>I ordered a Bluetooth speaker 10 days ago and I have not update on it</item>
+						<item>I ordered *</item>
+						<item>$ I don’t have an update *</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>I am sorry to know that you haven’t received your order yet. Can you please give me a moment while I pull up your order?</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>Okay</item>
+									<item>OK</item>
+									<item>Sure</item>
+									<item>Alright</item>
+								</grammar>
+								<output>
+									<prompt selectionType="RANDOM">
+										<item>Thanks for your patience and Thanks for being our loyalty rewards member. I do see you placed an order on the 9th of March for $199.00. Is that correct?</item>
+									</prompt>
+									<getUserInput>
+										<input>
+											<grammar>
+												<item>Yes</item>
+												<item>Ya</item>
+												<item>Yep</item>
+											</grammar>
+											<output>
+												<prompt selectionType="RANDOM">
+													<item>Thanks for Confirming that. We are unable to complete your order as the credit card used for purchase is no longer valid</item>
+												</prompt>
+											</output>
+										</input>
+									</getUserInput>
+								</output>
+							</input>
+						</getUserInput>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>Oh! Is that so ?</item>
+						<item>Oh *</item>
+						<item>Well is that so</item>
+						<item>Well is that so</item>
+						<item>When was *</item>
+						<item>$ know?</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Our records indicate we sent you an email with the subject ‘Payment Card Declined’ on the 12th of March 10:30 A.M.Now there is a possibility that our emails might have ended up in your spam folder. Can you please check you spam folders?</item>
+						</prompt>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>Let me quickly check *</item>
+						<item>Give me a moment to check</item>
+						<item>$ check *</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Sure. Take your time</item>
+						</prompt>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>I do see $ emails from customerservice@MBI.com *</item>
+						<item>I see your emails</item>
+						<item>Yes, I see your emails</item>
+						<item>Yes I see your emails</item>
+
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>No problem. You are our valued customer and we do everything at MBI to ensure we protect our customer’s interests. Would you like us to add a new credit card to the order and process it for you?</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>Okay Sure</item>
+									<item>Yes go ahead</item>
+									<item>Yes *</item>
+								</grammar>
+							</input>
+						</getUserInput>
+						
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>How long would it take if you cleared the order now?</item>
+						<item>How long *</item>
+						<item>So When will I get my order?</item>
+						<item>When will $ order * ?</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>It would take between 5-7 days for your package to arrive considering you paid for a standard shipment. However, I can place a request to expedite your order. Would you like us to do that?</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>Sure *</item>
+									<item>Okay</item>
+									<item>Yes</item>
+									<item>That is good</item>
+									<item>That's good</item>
+								</grammar>
+								<output>
+									<prompt selectionType="RANDOM">
+										<item>Thanks for the confirmation. Let me go ahead and expedite your order</item>
+									</prompt>
+								</output>
+							</input>
+						</getUserInput>						
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>What would be the new expected date of delivery?</item>
+						<item>So When will I get my package?</item>
+						<item>So When will I get $ package?</item>
+						<item>When will I get $ delivery?</item>
+						<item>So when will I get $ delivery?</item>
+						<item>$ delivery *</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>At this moment our system indicates you would receive your package by Tuesday, the 22nd Of March. </item>
+						</prompt>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>That sounds perfect *</item>
+						<item>Sound Good</item>
+						<item>Alright</item>
+						<item>Fine</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Thank you very much. We can now move forward with the order. Whenever you are ready please provide us with a new credit card information to process your payment for $199.00 by typing the credit card number,Expiration and CVV using the keypad</item>
+						</prompt>
+						<getUserInput>
+							<input>
+								<grammar>
+									<item>I am using a Visa Credit Card $ 8793</item>
+									<item>Card No XXXXXXXXXXXXXX8793 Expiry Date 2/20 and CVV 111</item>
+								</grammar>
+								<output>
+									<prompt selectionType="SEQUENTIAL">
+										<item>Thank you. We are confirming that your payment has been successfully processed and your order will arrive within the next 3 days. You should receive a shipment confirmation email and tracking information as soon as your order is shipped. Is there anything else that we could assist you with today? </item>
+									</prompt>
+								</output>								
+							</input>
+						</getUserInput>						
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>No that is it for now</item>
+						<item>No thats is $ for *</item>
+						<item>No that's it for *</item>
+						<item>$ that's $ for *</item>
+
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>Please feel free to reach out to us if you have any questions. You can email your concerns or leave feedback at customerservice@mbi.com. We look forward to serving you in the future.</item>
+						</prompt>
+					</output>
+				</input>
+				<input>
+					<grammar>
+						<item>Thank you</item>
+						<item>Thanks *</item>
+						<item>Ciao</item>
+						<item>GoodBye</item>
+						<item>Good Bye</item>
+					</grammar>
+					<output>
+						<prompt selectionType="RANDOM">
+							<item>GoodBye and have a great day ahead</item>
+						</prompt>
+					</output>
+				</input>				
+			</folder>
+			<folder label="Storage"/>
+		</folder>
+		<folder label="Global"/>
+		<folder label="Concepts"/>
+	</flow>
+	<constants>
+		<var_folder name="Home"/>
+	</constants>
+	<variables>
+		<var_folder name="Home">
+			<var name="Email" type="TEXT"/>
+		</var_folder>
+	</variables>
+	<settings>
+	</settings>
+</dialog>

@@ -44,14 +44,19 @@ $(document).ready(function () {
         outputElement: $chatInput[0],
         keepMicrophone: navigator.userAgent.indexOf('Firefox') > 0
       }).promise().then(function() {
-        converse($chatInput.val());
-      })
+			converse($chatInput.val());
+	})
       .then(deactivateMicButton)
       .catch(deactivateMicButton);
     });
   }
-
-  $micButton.click(record);
+  /* add a click handler to toggle the record function*/ 
+  $micButton.click(function() {
+	if($micButton.hasClass('active'))
+		deactivateMicButton();
+	else
+		record();
+  });
 
   $chatInput.keyup(function(event){
     if(event.keyCode === 13) {
@@ -64,63 +69,63 @@ $(document).ready(function () {
     // $chatInput.hide();
 
     // check if the user typed text or not
-    if (typeof(userText) !== undefined && $.trim(userText) !== '')
+    if (typeof(userText) !== undefined && $.trim(userText) !== ''){
       submitMessage(userText);
 
-    // build the conversation parameters
-    var params = { input : userText };
+		// build the conversation parameters
+		var params = { input : userText };
 
-    // check if there is a conversation in place and continue that
-    // by specifing the conversation_id and client_id
-    if (conversation_id) {
-      params.conversation_id = conversation_id;
-      params.client_id = client_id;
-    }
+		// check if there is a conversation in place and continue that
+		// by specifing the conversation_id and client_id
+		if (conversation_id) {
+		  params.conversation_id = conversation_id;
+		  params.client_id = client_id;
+		}
 
-    $.post('/api/dialog/conversation', params)
-      .done(function onSucess(dialog) {
-        $chatInput.val(''); // clear the text input
+		$.post('/api/dialog/conversation', params)
+		  .done(function onSucess(dialog) {
+			$chatInput.val(''); // clear the text input
 
-        $jsonPanel.html(JSON.stringify(dialog.conversation, null, 2));
+			$jsonPanel.html(JSON.stringify(dialog.conversation, null, 2));
 
-        // update conversation variables
-        conversation_id = dialog.conversation.conversation_id;
-        client_id = dialog.conversation.client_id;
+			// update conversation variables
+			conversation_id = dialog.conversation.conversation_id;
+			client_id = dialog.conversation.client_id;
 
-        console.log(dialog);
-        var texts = dialog.conversation.response;
-        var response = texts.join('&lt;br/&gt;'); // &lt;br/&gt; is <br/>
+			console.log(dialog);
+			var texts = dialog.conversation.response;
+			var response = texts.join('&lt;br/&gt;'); // &lt;br/&gt; is <br/>
 
-        getTTSToken.then(function(token) {
-          WatsonSpeech.TextToSpeech.synthesize({
-            text: texts,
-            token: token,
-            voice: 'en-US_AllisonVoice'
-          }).addEventListener('ended', record); // trigger the button again once TTS playback stops
-        });
+			getTTSToken.then(function(token) {
+			  WatsonSpeech.TextToSpeech.synthesize({
+				text: texts,
+				token: token,
+				voice: 'en-US_AllisonVoice'
+			  }).addEventListener('ended', record); // trigger the button again once TTS playback stops
+			});
 
-        $chatInput.show();
-        $chatInput[0].focus();
+			$chatInput.show();
+			$chatInput[0].focus();
 
-        $information.empty();
+			$information.empty();
 
-        addProperty($information, 'Dialog ID: ', dialog.dialog_id);
-        addProperty($information, 'Conversation ID: ', conversation_id);
-        addProperty($information, 'Client ID: ', client_id);
+			addProperty($information, 'Dialog ID: ', dialog.dialog_id);
+			addProperty($information, 'Conversation ID: ', conversation_id);
+			addProperty($information, 'Client ID: ', client_id);
 
-        talk('WATSON', response); // show
+			talk('WATSON', response); // show
 
-        getProfile();
-      })
-      .fail(function(error){
-        talk('WATSON', error.responseJSON ? error.responseJSON.error : error.statusText);
-      })
-      .always(function always(){
-        $loading.hide();
-        scrollChatToBottom();
-        $chatInput.focus();
-      });
-
+			getProfile();
+		  })
+		  .fail(function(error){
+			talk('WATSON', error.responseJSON ? error.responseJSON.error : error.statusText);
+		  })
+		  .always(function always(){
+			$loading.hide();
+			scrollChatToBottom();
+			$chatInput.focus();
+		  });
+	  }
   };
 
   var getProfile = function() {

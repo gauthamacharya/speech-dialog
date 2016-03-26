@@ -405,6 +405,7 @@ body {
 
 .base--h2,
 .base--STYLED h2 {
+  text-align: center;
   font-size: 1.95312em;
   font-weight: 700;
   color: #d74108; }
@@ -1120,7 +1121,7 @@ pre[class*=" language-"] {
     height: 5rem;
     width: 5rem; }
     .chat-box--avatar_WATSON {
-      background-color: #FFFFFF; }
+      background-color: #325c80; }
     .chat-box--avatar_YOU {
       background-color: #00B2EF; }
   .chat-box--avatar-img {
@@ -1177,7 +1178,7 @@ pre[class*=" language-"] {
 
 @media (min-width: 768px) {
   ._demo--container {
-    width: 760px;
+    width: 100%;
     margin: 0rem auto; } }
 
 @media (min-width: 1200px) {
@@ -1203,6 +1204,7 @@ pre[class*=" language-"] {
   padding: 2rem 1rem; }
   @media (min-width: 768px) {
     ._demo--content {
+	  width: 100%;	
       padding: 2rem 0rem; } }
 
 ._content--dialog {
@@ -1214,6 +1216,15 @@ pre[class*=" language-"] {
       float: left;
       padding-right: 2rem; } }
 
+._content--dialog--full {
+  margin-top: 2rem; }
+  @media (min-width: 768px) {
+    ._content--dialog {
+      width: 100%;
+      clear: right;
+      float: left;
+      padding-right: 2rem; } }
+	  
 ._content--data {
   margin-top: 0; }
   @media (min-width: 768px) {

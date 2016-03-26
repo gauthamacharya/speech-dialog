@@ -21,12 +21,8 @@ require('dotenv').config({silent: true});
 var express  = require('express'),
   secure     = require('express-secure-only'),
   app        = express(),
-  router	 = express.Router(),
   fs         = require('fs'),
-  path       = require('path'),
-  bluemix    = require('./config/bluemix'),
-  extend     = require('util')._extend,
-  watson     = require('watson-developer-cloud');
+  path       = require('path');
 
 
 // Bootstrap application settings

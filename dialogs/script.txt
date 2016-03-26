@@ -1,0 +1,34 @@
+In this demo scenario, 
+Our customer purchases a blue tooth speaker, but doesn't receive it even after the promised delivery date. 
+
+The customer calls customer care and tries to navigate through a web of menu options. 
+
+Our customer is put on hold for a long duration. The customer is frustrated and is very unlikely to ever do business with the retailer.
+
+If only our retailer had deployed Commerce Congnitive Service Assistant,  the customer experience would be very different.
+
+The customer would use his phone app and reach out to the virtual customer agent to get his concerns addressed. 
+
+The interactions would be just like he would have with a real human agent but without all the wait and frustration.
+
+Lets see how the conversation proceeds
+
+BEGIN CONVERSATION
+
+I ordered a Bluetooth speaker ten days ago, and ,I don't have an update yet
+Okay
+Yes
+Well, Is that so ?
+Let me check my email
+Yes, I see your emails -XX-
+Yes,go ahead
+So, When will I get my order? -XX-
+That is good
+So, When will I get my package?
+Alright
+Card No XXXXXXXXXXXXXX8793 Expiry Date 2/20 and CVV 111
+No that's it for now
+Good Bye
+
+
+Well as you can see, the user was interacting with the 'Cognitive Commerce Assistant' using natural language and was completely satisfied with the outcome. This is just demo and we need your funding and support to train the 'Cognitive Commerce Assistant' in various domain areas and applications related to commerce. So please support us by funding ! 
